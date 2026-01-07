@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: trading-bot-webhook
+    runtime: python310
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --workers 2
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: TESTNET_MODE
+        value: "True"
+      - key: PORT
+        value: "5000"
+      - key: BINANCE_API_KEY
+        sync: false
+      - key: BINANCE_API_SECRET
+        sync: false
+      - key: WEBHOOK_SECRET
+        sync: false
